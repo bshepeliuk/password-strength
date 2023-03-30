@@ -1,3 +1,9 @@
+:root {
+  --easy: #e74c3c;
+  --medium: #f1c40f;
+  --strong: #1abc9c;
+}
+
 body {
   margin: 0;
 }
@@ -53,21 +59,33 @@ body {
 }
 
 .invalid {
-  background-color: #e74c3c;
+  background-color: var(--easy, #e74c3c);
   transition: all 0.5s ease-out;
 }
 
 .easy {
-  background-color: #e74c3c;
+  background-color: var(--easy, #e74c3c);
   transition: all 0.5s ease-out;
 }
 
 .medium {
-  background-color: #f1c40f;
+  background-color: var(--medium, #f1c40f);
   transition: all 0.5s ease-out;
 }
 
 .strong {
-  background-color: #1abc9c;
+  background-color: var(--strong, #1abc9c);
   transition: all 0.5s ease-out;
+}
+
+.password-input.outline-easy {
+  outline-color: var(--easy, #e74c3c);
+}
+
+.password-input.outline-medium {
+  outline-color: var(--medium, #f1c40f);
+}
+
+.password-input.outline-strong {
+  outline-color: var(--strong, #1abc9c);
 }

@@ -1,6 +1,13 @@
 import { ChangeEvent, useState } from 'react';
+import { isEmpty } from '../helpers/isEmpty';
 import { useGetPasswordStrengthStyles } from '../hooks/useGetPasswordStrengthStyles';
 import { usePasswordStrengthValidator } from '../hooks/usePasswordStrengthValidator';
+
+const inputClassNames: Record<string, string> = {
+  easy: 'outline-easy',
+  medium: 'outline-medium',
+  strong: 'outline-strong',
+};
 
 function PasswordStrengthFormView() {
   const [password, setPassword] = useState('');
@@ -12,6 +19,9 @@ function PasswordStrengthFormView() {
     validate(evt.target.value);
   };
 
+  const outlineClassName = isEmpty(strength) ? '' : inputClassNames[strength];
+  const inputClassName = 'password-input ' + `${outlineClassName}`;
+
   return (
     <div className="password-form-container">
       <form className="password-form">
@@ -20,7 +30,7 @@ function PasswordStrengthFormView() {
         </label>
         <input
           id="password"
-          className="password-input"
+          className={inputClassName}
           type="password"
           value={password}
           onChange={handleChange}
