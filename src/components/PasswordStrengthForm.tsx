@@ -1,16 +1,22 @@
 import { ChangeEvent, useState } from 'react';
 import { getPasswordStrengthStyles } from '../helpers/getPasswordStrengthStyles';
-import { isEmpty } from '../helpers/isEmpty';
-import { usePasswordStrengthValidator } from '../hooks/usePasswordStrengthValidator';
+import { StrengthKeysType, usePasswordStrengthValidator } from '../hooks/usePasswordStrengthValidator';
+import VisibleIcon from '../assets/password-visible.png';
+import InvisibleIcon from '../assets/password-invisible.png';
 
-const inputClassNames: Record<string, string> = {
-  easy: 'outline-easy',
-  medium: 'outline-medium',
-  strong: 'outline-strong',
+type PasswordType = 'text' | 'password';
+
+const inputClassNames: Record<StrengthKeysType, string> = {
+  default: 'password-input',
+  invalid: 'password-input outline-invalid',
+  easy: 'password-input outline-easy',
+  medium: 'password-input outline-medium',
+  strong: 'password-input outline-strong',
 };
 
 function PasswordStrengthForm() {
   const [password, setPassword] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const { validate, strength } = usePasswordStrengthValidator();
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -18,25 +24,29 @@ function PasswordStrengthForm() {
     validate(evt.target.value);
   };
 
+  const togglePasswordVisibility = () => setIsPasswordVisible(!isPasswordVisible);
+
   const { styles } = getPasswordStrengthStyles(strength);
 
-  const outlineClassName = isEmpty(strength) ? '' : inputClassNames[strength];
-  const inputClassName = 'password-input ' + `${outlineClassName}`;
+  const passwordInputType: PasswordType = isPasswordVisible ? 'text' : 'password';
 
   return (
     <div className="password-form-container">
       <form className="password-form">
         <label htmlFor="password" className="password-label">
           Password
+          <input
+            id="password"
+            className={inputClassNames[strength]}
+            type={passwordInputType}
+            placeholder="Enter your password..."
+            value={password}
+            onChange={handleChange}
+          />
+          <button type="button" className="password-visibility-btn" onClick={togglePasswordVisibility}>
+            <PasswordVisibilityIcon isVisible={isPasswordVisible} />
+          </button>
         </label>
-        <input
-          id="password"
-          className={inputClassName}
-          type="password"
-          placeholder="Enter your password..."
-          value={password}
-          onChange={handleChange}
-        />
       </form>
 
       <div className="strength-indicator">
@@ -46,6 +56,10 @@ function PasswordStrengthForm() {
       </div>
     </div>
   );
+}
+
+function PasswordVisibilityIcon({ isVisible }: { isVisible: boolean }) {
+  return isVisible ? <img src={VisibleIcon} /> : <img src={InvisibleIcon} />;
 }
 
 export default PasswordStrengthForm;

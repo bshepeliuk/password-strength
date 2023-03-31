@@ -6,7 +6,7 @@ type BaseStylesType = Record<StrengthKeysType, Record<'first' | 'second' | 'thir
 
 const itemStyles: ItemStylesType = {
   default: {
-    backgroundColor: '#bdc3c7',
+    backgroundColor: '#DFDFDE',
     transition: 'all 0.5s ease-out',
   },
   invalid: {

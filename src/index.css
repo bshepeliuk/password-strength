@@ -31,6 +31,7 @@ body {
 
 .password-label {
   color: #34495e;
+  position: relative;
 }
 
 .password-input {
@@ -39,8 +40,20 @@ body {
   border-radius: 4px;
   border-radius: 1px solid;
   border: 1px solid #bdc3c7;
-  padding: 10px;
   box-sizing: border-box;
+  padding: 10px 40px 10px 10px;
+}
+
+.password-visibility-btn {
+  position: absolute;
+  right: 4px;
+  background-color: transparent;
+  border: none;
+  top: 24px;
+}
+
+.password-visibility-btn:hover {
+  cursor: pointer;
 }
 
 .strength-indicator {
@@ -54,6 +67,7 @@ body {
   border-radius: 3px;
 }
 
+.password-input.outline-invalid,
 .password-input.outline-easy {
   outline-color: var(--easy, #e74c3c);
 }
