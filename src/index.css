@@ -15,6 +15,14 @@ body {
   align-items: center;
 }
 
+.column {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
 .title {
   color: #34495e;
 }
