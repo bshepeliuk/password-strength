@@ -1,9 +1,9 @@
-import PasswordStrengthFormView from './components/PasswordStrengthFormView';
+import PasswordStrengthForm from './components/PasswordStrengthForm';
 
 function App() {
   return (
     <div className="container">
-      <PasswordStrengthFormView />
+      <PasswordStrengthForm />
     </div>
   );
 }

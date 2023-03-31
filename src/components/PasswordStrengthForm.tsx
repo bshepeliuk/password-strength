@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
+import { getPasswordStrengthStyles } from '../helpers/getPasswordStrengthStyles';
 import { isEmpty } from '../helpers/isEmpty';
-import { useGetPasswordStrengthStyles } from '../hooks/useGetPasswordStrengthStyles';
 import { usePasswordStrengthValidator } from '../hooks/usePasswordStrengthValidator';
 
 const inputClassNames: Record<string, string> = {
@@ -9,15 +9,16 @@ const inputClassNames: Record<string, string> = {
   strong: 'outline-strong',
 };
 
-function PasswordStrengthFormView() {
+function PasswordStrengthForm() {
   const [password, setPassword] = useState('');
   const { validate, strength } = usePasswordStrengthValidator();
-  const { styles } = useGetPasswordStrengthStyles(strength, password);
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setPassword(evt.target.value);
     validate(evt.target.value);
   };
+
+  const { styles } = getPasswordStrengthStyles(strength);
 
   const outlineClassName = isEmpty(strength) ? '' : inputClassNames[strength];
   const inputClassName = 'password-input ' + `${outlineClassName}`;
@@ -32,18 +33,19 @@ function PasswordStrengthFormView() {
           id="password"
           className={inputClassName}
           type="password"
+          placeholder="Enter your password..."
           value={password}
           onChange={handleChange}
         />
       </form>
 
       <div className="strength-indicator">
-        <span className={styles.first}></span>
-        <span className={styles.second}></span>
-        <span className={styles.third}></span>
+        <span style={styles.first}></span>
+        <span style={styles.second}></span>
+        <span style={styles.third}></span>
       </div>
     </div>
   );
 }
 
-export default PasswordStrengthFormView;
+export default PasswordStrengthForm;

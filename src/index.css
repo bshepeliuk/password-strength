@@ -54,30 +54,6 @@ body {
   border-radius: 3px;
 }
 
-.empty {
-  background-color: #bdc3c7;
-}
-
-.invalid {
-  background-color: var(--easy, #e74c3c);
-  transition: all 0.5s ease-out;
-}
-
-.easy {
-  background-color: var(--easy, #e74c3c);
-  transition: all 0.5s ease-out;
-}
-
-.medium {
-  background-color: var(--medium, #f1c40f);
-  transition: all 0.5s ease-out;
-}
-
-.strong {
-  background-color: var(--strong, #1abc9c);
-  transition: all 0.5s ease-out;
-}
-
 .password-input.outline-easy {
   outline-color: var(--easy, #e74c3c);
 }
